@@ -56,4 +56,3 @@ const style = StyleSheet.create({
   punto: { color: colors.borde, marginHorizontal: 2 },
   precio: { fontSize: 14, fontWeight: '800', color: colors.primario },
 });
-

@@ -1,4 +1,3 @@
-// --------------index.js--------------
 import { Platform } from 'react-native';
  
 export const colors = {
@@ -59,4 +58,4 @@ export const coloresPorNivel = {
   Conversacional: '#7C3AED',
 };
  
-export default { colors, spacing, radius, typography, sombra, coloresPorNivel };  
+export default { colors, spacing, radius, typography, sombra, coloresPorNivel };
