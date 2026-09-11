@@ -1,14 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text, TextInput, StyleSheet, ScrollView, FlatList } from 'react-native';
-
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-
 import LabelLevel from '../components/LabelLevel';
 import Card from '../components/Card'
 import LevelChip from '../components/LevelChip';
 import useResponsive from '../hooks/useResponsive';
-
+import EmptyState from '../components/EmptyState';
 import { colors, radius, spacing, typography } from '../theme';
 import { CLASES, formatearPrecio, NIVELES } from '../data/clases';
 
@@ -16,7 +14,7 @@ export default function ClasesScreen({ navigation }) {
     const insets = useSafeAreaInsets();
     const {columns, paddingHorizontal} = useResponsive();
     const [nivel, setNivel] = useState();
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState('')
 
     const results = useMemo(() =>{
         const textSearch = search.trim().toLowerCase();
@@ -28,7 +26,6 @@ export default function ClasesScreen({ navigation }) {
             return sameNivel && sameText
         });
     }, [nivel, search] )
-
     return (
         <View style={[styles.container, { paddingTop: insets.top }]}>
             <View style={styles.header}>
@@ -81,8 +78,19 @@ export default function ClasesScreen({ navigation }) {
                     paddingHorizontal,
                     flexGrow: 1
                 }}
+                numColumns={ columns }
+                ListEmptyComponent={
+                    <EmptyState 
+                        icono="search-outline"
+                        titulo="No encontramos resultados"
+                        mensaje="La combinación de busqueda no tiene resultados"
+                        onAction={()=>{
+                            setNivel('Todos');
+                            setSearch('');
+                        }}
+                    />
+                }
             />
-            //agregar opcion de no hay resultados
         </View>
     );
 }
