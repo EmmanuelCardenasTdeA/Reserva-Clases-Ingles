@@ -1,28 +1,35 @@
-import {React} from 'react'
-import {View, Text, Image, Pressable, StyleSheet} from 'react-native'
-import {LabelLevel} from './LabelLevel'
-import {colors, radius, spacing, typography} from '../theme'
-import {formatearPrecio} from '../data/clases'
-import {CLASES} from '../data/clases'
+import React from 'react';
+import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
+import LabelLevel from './LabelLevel';
+import { colors, radius, spacing, typography } from '../theme';
+import { formatearPrecio } from '../data/clases';
 
+export default function Card({ clase, urlImage, onPress, width }) {
+  if (!clase) return null;
 
-export default function Card ({clase, urlImage, onPress, width}) {
-    return(
-        <Pressable
-        onPress={onPress}>
+  const imageUri = clase.imagen || clase.image || urlImage;
 
-            <Image source ={{uri: clase.image}}/>
-            <View>
-                <LabelLevel level={clase.nivel}/>
-                //Nombre profesor
-                //Horario
-                //precio
-                <Text style= {theme.typography.subtitulo}> {clase.profesor.nombre}</Text>
-                <Text style= {theme.typography.cuerpo}> {clase.horarios}</Text>
-                <Text style= {theme.typography.cuerpo}> {formatearPrecio(clase.precio)}</Text>
-            </View>
-        </Pressable>    
-    )
+  return (
+    <Pressable
+      style={[style.tarjeta, width ? { width } : null]}
+      onPress={onPress}
+    >
+      {imageUri && (
+        <Image source={{ uri: imageUri }} style={style.imagen} />
+      )}
+      <View style={style.cuerpo}>
+        {clase.nivel && <LabelLevel level={clase.nivel} />}
+        
+        <Text style={typography.subtitulo}>{clase.profesor?.nombre}</Text>
+        
+        <Text style={typography.cuerpo}>
+          {Array.isArray(clase.horarios) ? clase.horarios[0] : clase.horarios}
+        </Text>
+        
+        <Text style={typography.cuerpo}>{formatearPrecio(clase.precio)}</Text>
+      </View>
+    </Pressable>
+  );
 }
 
 const style = StyleSheet.create({

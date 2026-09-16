@@ -1,13 +1,14 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ClasesScreen from '../screens/ClasesScreen';
-import DetailClaseScreen from '../screens/DetailClaseScreen'
+import DetailClaseScreen from '../screens/DetailClaseScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function ClasesStack() {
   return (
     <Stack.Navigator
+      initialRouteName="Home"
       screenOptions={{
         headerShown: false,
       }}
@@ -18,9 +19,9 @@ export default function ClasesStack() {
         options={{ headerShown: false }}
       />
       <Stack.Screen 
-        name = "DetailClase"
+        name="DetailClase"
         component={DetailClaseScreen}
-        options={{title: 'Detail', headerBackTitle: 'Back'}}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

@@ -13,23 +13,24 @@ import { CLASES, formatearPrecio, NIVELES } from '../data/clases';
 export default function ClasesScreen({ navigation }) {
     const insets = useSafeAreaInsets();
     const {columns, paddingHorizontal} = useResponsive();
-    const [nivel, setNivel] = useState();
+    const [nivel, setNivel] = useState('Todos');
     const [search, setSearch] = useState('')
+    
 
     const results = useMemo(() =>{
         const textSearch = search.trim().toLowerCase();
         return CLASES.filter((clase) => {
             const sameNivel = nivel === 'Todos' || clase.nivel === nivel
-            const sameText = textSearch || 
-            clase.titulo.toLocaleLowerCase().includes(textSearch) ||
-            clase.profesor.nombre.toLocaleLowerCase.includes(textSearch);
-            return sameNivel && sameText
+            const sameText = !textSearch || 
+                clase.titulo.toLowerCase().includes(textSearch) ||
+                clase.profesor.nombre.toLowerCase().includes(textSearch);
+            return sameNivel && sameText;
         });
-    }, [nivel, search] )
+    }, [nivel, search]);
     return (
         <View style={[styles.container, { paddingTop: insets.top }]}>
             <View style={styles.header}>
-                <Text style={typography.titulo}>Aplicación para clases de inglés</Text>
+                <Text style={typography.titulo}>Clases de inglés</Text>
                 <View style={styles.searchContainer}>
                     <Ionicons name="search" size={18} color={colors.textoSuave}/>
                     <TextInput 
@@ -44,13 +45,13 @@ export default function ClasesScreen({ navigation }) {
                             name='close-circle' 
                             size={18} 
                             color={colors.textoSuave} 
-                            onPress={() => setSearch('')}
+                            onPress={() => setSearch('')} 
                         />
                     )}
                 </View>
             </View>
             <ScrollView
-                style={{ flexGrow: 0 }}
+                style={styles.chipsScrollView}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={styles.chipsContent}
@@ -67,12 +68,12 @@ export default function ClasesScreen({ navigation }) {
             <FlatList 
                 data={results}
                 keyExtractor={(item) => item.id}
-                renderItem={({item}) => {
+                renderItem={({item}) => (
                     <Card 
                         clase={item}
                         onPress={() => navigation.navigate('DetailClase', {clase:item})}
                     />
-                }}
+                )}
                 showsVerticalScrollIndicator = {false}
                 contentContainerStyle={{
                     paddingHorizontal,
@@ -121,7 +122,15 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: colors.texto,
     },
-    chipsContent: {
-        paddingVertical: spacing.sm,
+    chipsScrollView: {
+        flexGrow: 0,
+        marginHorizontal: -spacing.lg,
+        marginVertical: spacing.sm,
     },
+    chipsContent: {
+        paddingHorizontal: spacing.lg,
+        paddingRight: spacing.xxl * 2,
+        alignItems: 'center',
+        flexDirection: 'row',
+    }
 });

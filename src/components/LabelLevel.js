@@ -15,14 +15,13 @@ export default function LabelLevel({ level }) {
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'flex-start',
-    paddingVertical: 3,
+    paddingVertical: 4,
     paddingHorizontal: spacing.sm,
     borderRadius: radius.sm,
-    borderWidth: 1,
+    borderWidth: 1.5
   },
   text: {
-    fontSize: 11,
-    fontWeight: '700',
-    letterSpacing: 0.3,
+    fontSize: 12,
+    fontWeight: '800'
   },
 });
