@@ -2,6 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { colors, spacing, typography } from "../theme";
 
 //Importamos las 3 pantallas
 import ClasesScreen from "../screens/ClasesScreen";
@@ -48,11 +49,11 @@ export default function TabNavigation() {
                 }
             })}
         >
-            
-
-
+            {/*<Tab.Screen name="HomeTab" component={HomeScreen} options={{title: 'Inicio'}} />*/}
+            <Tab.Screen name="ClasesTab" component={ClasesStack} options={{title: 'Clases'}} />
+            {/* <Tab.Screen name="ReservasTab" component={ReservasScreen} options={{title: 'Reservas'}} /> */}
+            <Tab.Screen name="UserTab" component={UserScreen} options={{title: 'Usuario'}} />
         </Tab.Navigator>
-        
     )
 }
 
