@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// 1)uardar datos
+// 1) Guardar datos
 
 export const saveData = async (key, value) => {
   try {
