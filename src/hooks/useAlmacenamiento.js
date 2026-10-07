@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, act } from "react";
 
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-export default function useAlmacenamieto(clave, valorInicial){
+export default function useAlmacenamiento(clave, valorInicial){
     const [valor,setValor] = useState(valorInicial);
     const [listo,setListo] = useState(false);
 
@@ -23,7 +23,7 @@ export default function useAlmacenamieto(clave, valorInicial){
         }
     }, [clave])
 
-    const acualizar = useCallback(
+    const actualizar = useCallback(
         async(nuevoValor) => {
             setValor(nuevoValor);
             try {
