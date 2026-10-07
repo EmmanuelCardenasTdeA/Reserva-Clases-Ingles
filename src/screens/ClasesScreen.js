@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
     },
     chipsScrollView: {
         flexGrow: 0,
+        flexShrink: 0,
         marginHorizontal: -spacing.lg,
         marginVertical: spacing.sm,
     },
