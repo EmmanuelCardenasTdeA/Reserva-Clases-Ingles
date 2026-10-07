@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 export default function ClasesStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="ClasesList"
       screenOptions={{
         headerShown: false,
       }}
@@ -21,6 +21,7 @@ export default function ClasesStack() {
       />
       <Stack.Screen
         name="Clases"
+        name="ClasesList"
         component={ClasesScreen}
         options={{ headerShown: false }}
       />
