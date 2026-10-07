@@ -31,25 +31,12 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.subtitulo}>AGREGAR INFO</Text>
         </View>
 
-        {/* Tarjeta informativa / Banner */}
-        <View style={styles.banner}>
-          <View style={styles.iconoBanner}>
-            <Ionicons name="sparkles" size={26} color={colors.primario} />
-          </View>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.bannerTitulo}>Aprende a tu propio ritmo</Text>
-            <Text style={styles.bannerTexto}>
-              Clases virtuales y presenciales con profesores certificados.
-            </Text>
-          </View>
-        </View>
-
         {/* Sección de Clases Recomendadas */}
         <View style={styles.seccionHeader}>
           <View>
             <Text style={styles.tituloSeccion}>Clases Recomendadas</Text>
             <Text style={styles.descripcionSeccion}>
-              Cursos con calificación superior a 4.5
+              Cursos con mejor rating
             </Text>
           </View>
           <View style={styles.badgeContador}>
