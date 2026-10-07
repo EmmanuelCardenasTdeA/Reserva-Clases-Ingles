@@ -70,3 +70,98 @@ export default function HomeScreen({ navigation }) {
   );
 }
 
+const styles = StyleSheet.create({
+  contenedor: {
+    flex: 1,
+    backgroundColor: colors.fondo,
+  },
+  contenido: {
+    paddingHorizontal: spacing.lg,
+    paddingBottom: spacing.xxl,
+  },
+  encabezado: {
+    marginTop: spacing.md,
+    marginBottom: spacing.md,
+  },
+  saludo: {
+    ...typography.titulo,
+    fontSize: 24,
+  },
+  subtitulo: {
+    ...typography.secundario,
+    fontSize: 15,
+    marginTop: spacing.xs,
+  },
+  banner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.superficie,
+    padding: spacing.md,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderColor: colors.borde,
+    marginBottom: spacing.md,
+    gap: spacing.md,
+  },
+  iconoBanner: {
+    width: 46,
+    height: 46,
+    borderRadius: radius.md,
+    backgroundColor: colors.primarioSuave,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  bannerTitulo: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: colors.texto,
+  },
+  bannerTexto: {
+    fontSize: 13,
+    color: colors.textoSuave,
+    marginTop: 2,
+    lineHeight: 18,
+  },
+  botonExplorar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.primario,
+    paddingVertical: spacing.md,
+    borderRadius: radius.md,
+    marginBottom: spacing.lg,
+    gap: spacing.sm,
+  },
+  textoBotonExplorar: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    fontWeight: '700',
+  },
+  seccionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: spacing.md,
+  },
+  tituloSeccion: {
+    fontSize: 18,
+    fontWeight: '800',
+    color: colors.texto,
+  },
+  descripcionSeccion: {
+    fontSize: 12,
+    color: colors.textoSuave,
+    marginTop: 2,
+  },
+  badgeContador: {
+    backgroundColor: colors.primarioSuave,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 4,
+    borderRadius: radius.full,
+  },
+  textoBadge: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: colors.primario,
+  },
+});
