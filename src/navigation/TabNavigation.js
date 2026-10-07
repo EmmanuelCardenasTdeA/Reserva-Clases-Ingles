@@ -7,6 +7,7 @@ import { colors, spacing, typography } from "../theme";
 //Importamos las 3 pantallas
 import ClasesScreen from "../screens/ClasesScreen";
 import UserScreen from "../screens/UserScreen";
+import HomeScreen from "../screens/HomeScreen";
 
 //Importamos Stack de clases
 import ClasesStack from "./ClasesStack";
@@ -49,7 +50,7 @@ export default function TabNavigation() {
                 }
             })}
         >
-            {/*<Tab.Screen name="HomeTab" component={HomeScreen} options={{title: 'Inicio'}} />*/}
+            <Tab.Screen name="HomeTab" component={HomeScreen} options={{title: 'Inicio'}} />
             <Tab.Screen name="ClasesTab" component={ClasesStack} options={{title: 'Clases'}} />
             {/* <Tab.Screen name="ReservasTab" component={ReservasScreen} options={{title: 'Reservas'}} /> */}
             <Tab.Screen name="UserTab" component={UserScreen} options={{title: 'Usuario'}} />

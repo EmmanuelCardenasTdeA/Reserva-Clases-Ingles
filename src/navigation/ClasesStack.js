@@ -20,7 +20,6 @@ export default function ClasesStack() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Clases"
         name="ClasesList"
         component={ClasesScreen}
         options={{ headerShown: false }}
