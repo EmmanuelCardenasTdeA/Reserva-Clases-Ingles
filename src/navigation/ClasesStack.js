@@ -1,5 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from '../screens/HomeScreen';
 import ClasesScreen from '../screens/ClasesScreen';
 import DetailClaseScreen from '../screens/DetailClaseScreen';
 
@@ -14,6 +15,12 @@ export default function ClasesStack() {
       }}
     >
       <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Clases"
         name="ClasesList"
         component={ClasesScreen}
         options={{ headerShown: false }}
