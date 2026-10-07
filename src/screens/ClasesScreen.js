@@ -30,7 +30,17 @@ export default function ClasesScreen({ navigation }) {
     return (
         <View style={[styles.container, { paddingTop: insets.top }]}>
             <View style={styles.header}>
-                <Text style={typography.titulo}>Clases de inglés</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm }}>
+                    {navigation.canGoBack() && (
+                        <Ionicons 
+                            name="arrow-back" 
+                            size={24} 
+                            color={colors.texto} 
+                            onPress={() => navigation.goBack()} 
+                        />
+                    )}
+                    <Text style={typography.titulo}>Clases de inglés</Text>
+                </View>
                 <View style={styles.searchContainer}>
                     <Ionicons name="search" size={18} color={colors.textoSuave}/>
                     <TextInput 

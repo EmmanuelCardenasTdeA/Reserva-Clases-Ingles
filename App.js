@@ -21,11 +21,9 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer theme={temaNavegacion}>
-        <StatusBar style="dark"/>
+        <StatusBar style="dark" />
         <ClasesStack />
       </NavigationContainer>
     </SafeAreaProvider>
   );
 }
-
-
