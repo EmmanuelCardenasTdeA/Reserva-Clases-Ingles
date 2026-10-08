@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,8 +12,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import useResponsive from "../hooks/useResponsive";
+import useReserva from "../hooks/useReserva";
 import { colors, spacing, radius, typography, sombra } from "../theme";
-import { formatearPrecio } from "../data/clases";
+import { CLASES, formatearPrecio } from "../data/clases";
 import LabelLevel from "../components/LabelLevel";
 
 export default function DetailClase({ route, navigation }) {
@@ -22,37 +23,56 @@ export default function DetailClase({ route, navigation }) {
   const { paddingHorizontal, isTable } = useResponsive();
   const esTablet = isTable;
 
-  // Estado para el horario seleccionado
-  const [horario, setHorario] = useState(clase?.horarios?.[0] || "");
+  // Accedemos a la función agregarReserva del contexto
+  const { agregarReserva } = useReserva();
 
-  // Estado para llevar conteo de cupos
-  const [cupos, setCupos] = useState(clase.cupos)
+  // Buscamos la clase en CLASES para mantener siempre la referencia y los cupos actualizados
+  const claseInfo = CLASES.find((claseItem) => String(claseItem.id) === String(clase.id)) || clase;
+
+  // Estado para el horario seleccionado
+  const [horario, setHorario] = useState(claseInfo?.horarios?.[0] || "");
+
+  // Estado para llevar conteo reactivo de cupos
+  const [cupos, setCupos] = useState(claseInfo.cupos);
+
+  // Mantenemos sincronizado el estado si los cupos cambian (ej: al cancelar una reserva)
+  useEffect(() => {
+    setCupos(claseInfo.cupos);
+  }, [claseInfo.cupos]);
 
   const handleVolver = () => {
-    if (navigation.canGoBack()) {
-      navigation.goBack();
-    } else {
-      navigation.navigate("Home");
-    }
+    navigation.navigate("ClasesList");
   };
 
   const handleReservar = () => {
-    if (cupos <= 0){
-      Alert.alert("Sin cupos disponibles")
+    if (cupos <= 0) {
+      Alert.alert("Sin cupos disponibles", "No quedan cupos para esta clase.");
       return;
     }
 
-    {/*Restar los cupos*/}
-    const nuevosCupos = cupos - 1;
-    setCupos(nuevosCupos)
-    {/*Guardar cambio*/}
-    clase.cupos = nuevosCupos;
+    // Intentamos agregar la reserva
+    const resultado = agregarReserva(claseInfo, horario);
 
-    {/*Mostrar alerta con los cupos restantes */}
+    // Si hubo conflicto (mismo día y misma hora)
+    if (!resultado.ok) {
+      Alert.alert("Horario no disponible", resultado.mensaje);
+      return;
+    }
+
+    // Actualizamos el estado de cupos con el nuevo valor
+    setCupos(claseInfo.cupos);
+
+    // Alerta de confirmación con el ID autoincremental
     Alert.alert(
-      "Reserva Confirmada",
-      `Has reservado la clase "${clase.titulo}" con ${clase.profesor.nombre} en el horario: ${horario}.`,
-      [{ text: "Aceptar"}]
+      "¡Reserva Confirmada!",
+      `Tu reserva #${resultado.id} para "${claseInfo.titulo}" en el horario ${horario} ha sido realizada con éxito.`,
+      [
+        {
+          text: "Ver mis reservas",
+          onPress: () => navigation.navigate("ReservasTab"),
+        },
+        { text: "Aceptar", style: "cancel" },
+      ]
     );
   };
 
@@ -139,7 +159,7 @@ export default function DetailClase({ route, navigation }) {
             <View style={styles.dato}>
               <Ionicons name="people-outline" size={20} color={colors.primario} />
               <Text style={typography.secundario}>Cupos</Text>
-              <Text style={styles.datoValor}>{clase.cupos}</Text>
+              <Text style={styles.datoValor}>{cupos}</Text>
             </View>
           </View>
 

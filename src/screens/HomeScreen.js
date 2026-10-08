@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -8,14 +8,38 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { CLASES } from '../data/clases';
 import Card from '../components/Card';
 import { colors, spacing, radius, typography } from '../theme';
+import { getData } from '../context/StorageContext';
+import { STORAGE_KEYS } from '../constants/storageKeys';
 
 export default function HomeScreen({ navigation }) {
   const insets = useSafeAreaInsets();
+  const [nombre, setNombre] = useState('');
+  const [correo, setCorreo] = useState('')
+  // Se carga el nombre del perfil
+  useFocusEffect(
+    useCallback(() => {
+      const cargarPerfil = async () => {
+        const perfil = await getData(STORAGE_KEYS.USER_PROFILE);
+        if (perfil && perfil.name) {
+          setNombre(perfil.name.trim());
+        } else {
+          setNombre('');
+        }
+        if(perfil && perfil.email){
+          setCorreo(perfil.email.trim());
+        }else{
+          setCorreo('')
+        }
+      };
 
+      cargarPerfil();
+    }, [])
+  );
   // Filtramos las clases con calificación superior a 4.5
   const clasesRecomendadas = CLASES.filter((clase) => clase.rating > 4.5);
 
@@ -27,8 +51,10 @@ export default function HomeScreen({ navigation }) {
       >
         {/* Encabezado de bienvenida */}
         <View style={styles.encabezado}>
-          <Text style={styles.saludo}>AGREGAR NOMBRE DEL ESTUDIANTE</Text>
-          <Text style={styles.subtitulo}>AGREGAR INFO</Text>
+          <Text style={styles.saludo}>
+            Hola{nombre ? `, ${nombre}` : ' Inicia Sesion'}
+          </Text>
+          <Text style={styles.subtitulo}>{correo ? `${correo}`: ''}</Text>
         </View>
 
         {/* Sección de Clases Recomendadas */}
@@ -49,7 +75,12 @@ export default function HomeScreen({ navigation }) {
           <Card
             key={clase.id}
             clase={clase}
-            onPress={() => navigation.navigate('DetailClase', { clase })}
+            onPress={() =>
+              navigation.navigate('ClasesTab', {
+                screen: 'DetailClase',
+                params: { clase },
+              })
+            }
           />
         ))}
       </ScrollView>

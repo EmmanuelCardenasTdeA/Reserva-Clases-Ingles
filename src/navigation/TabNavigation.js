@@ -4,10 +4,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, spacing, typography } from "../theme";
 
-//Importamos las 3 pantallas
+//Importamos las pantallas
 import ClasesScreen from "../screens/ClasesScreen";
 import UserScreen from "../screens/UserScreen";
 import HomeScreen from "../screens/HomeScreen";
+import ReservasScreen from "../screens/ReservasScreen";
 
 //Importamos Stack de clases
 import ClasesStack from "./ClasesStack";
@@ -18,6 +19,7 @@ export default function TabNavigation() {
     return(
         <Tab.Navigator
             screenOptions = {({route}) =>({
+                headerShown: false,
                 tabBarActiveTintColor: colors.primario,
                 tabBarInactiveTintColor: colors.textoSuave,
                 tabBarStyle: {
@@ -28,7 +30,6 @@ export default function TabNavigation() {
                 },
                 tabBarLabelStyle: {
                     fontSize: 12,
-                    fontFamily: typography.fuente,
                 },
                 tabBarIcon: ({focused, color, size}) => {
                     let iconName;
@@ -52,7 +53,7 @@ export default function TabNavigation() {
         >
             <Tab.Screen name="HomeTab" component={HomeScreen} options={{title: 'Inicio'}} />
             <Tab.Screen name="ClasesTab" component={ClasesStack} options={{title: 'Clases'}} />
-            {/* <Tab.Screen name="ReservasTab" component={ReservasScreen} options={{title: 'Reservas'}} /> */}
+            <Tab.Screen name="ReservasTab" component={ReservasScreen} options={{title: 'Reservas'}} />
             <Tab.Screen name="UserTab" component={UserScreen} options={{title: 'Usuario'}} />
         </Tab.Navigator>
     )
