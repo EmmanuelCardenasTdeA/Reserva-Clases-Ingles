@@ -61,8 +61,8 @@ export function ReservaProvider({ children }) {
   const agregarReserva = useCallback(
     (clase, horario) => {
       // Validación: No permitir 2 clases el mismo día a la misma hora
-      // Compara el texto del horario (ej: "Lun 7:00 a.m.")
-      // Si el día es igual pero la hora diferente ("Lun 6:00 p.m."), no habrá conflicto
+      // Compara el texto del horario
+      // Si el día es igual pero la hora diferente
       const horarioNormalizado = horario ? horario.trim().toLowerCase() : "";
       const conflicto = reservas.find(
         (reserva) => reserva.horario && reserva.horario.trim().toLowerCase() === horarioNormalizado
@@ -81,7 +81,7 @@ export function ReservaProvider({ children }) {
         claseEncontrada.cupos = Math.max(0, claseEncontrada.cupos - 1);
       }
 
-      // ID Autoincremental garantizado (1, 2, 3...)
+      // ID Autoincremental
       const nuevoId = Math.max(
         ultimoId,
         reservas.length > 0 ? Math.max(...reservas.map((reserva) => Number(reserva.id) || 0)) : 0

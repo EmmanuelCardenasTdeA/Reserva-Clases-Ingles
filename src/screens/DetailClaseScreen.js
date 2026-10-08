@@ -53,7 +53,7 @@ export default function DetailClase({ route, navigation }) {
     // Intentamos agregar la reserva
     const resultado = agregarReserva(claseInfo, horario);
 
-    // Si hubo conflicto (mismo día y misma hora)
+    // Si hubo conflicto con la reserva
     if (!resultado.ok) {
       Alert.alert("Horario no disponible", resultado.mensaje);
       return;

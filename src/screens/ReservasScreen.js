@@ -30,7 +30,7 @@ export default function ReservasScreen({ navigation }) {
   const handleCancelar = (reserva) => {
     Alert.alert(
       "Cancelar Reserva",
-      `¿Estás seguro de que deseas cancelar la Reserva #${reserva.id} de "${reserva.titulo}"? El cupo será liberado y devuelto a la clase.`,
+      `¿Estás seguro de que deseas cancelar la Reserva #${reserva.id} de "${reserva.titulo}"?`,
       [
         { text: "No, mantener", style: "cancel" },
         {
@@ -53,7 +53,7 @@ export default function ReservasScreen({ navigation }) {
     return (
       <View style={[styles.pantalla, styles.centrado]}>
         <ActivityIndicator size="large" color={colors.primario} />
-        <Text style={styles.textoCargando}>Cargando reservas...</Text>
+        <Text style={styles.textoCargando}>Cargando reservas</Text>
       </View>
     );
   }
@@ -75,7 +75,7 @@ export default function ReservasScreen({ navigation }) {
         </Text>
       </View>
 
-      {/* Si no hay reservas, mostramos el componente de estado vacío */}
+      {/* Si no hay reservas, mostrar vacio*/}
       {reservas.length === 0 ? (
         <View style={styles.contenedorVacio}>
           <EmptyState
@@ -143,7 +143,7 @@ export default function ReservasScreen({ navigation }) {
 
               {/* Detalles: Horario, Modalidad y Precio */}
               <View style={styles.seccionDetalles}>
-                {/* Horario reservado (mismo día y hora única) */}
+                {/* Horario reservado */}
                 <View style={styles.filaDetalle}>
                   <Ionicons
                     name="time"
@@ -182,7 +182,7 @@ export default function ReservasScreen({ navigation }) {
                 </View>
               </View>
 
-              {/* Pie de la tarjeta: Fecha de reserva y Botón cancelar */}
+              {/*Fecha de reserva y Botón cancelar */}
               <View style={styles.pieTarjeta}>
                 <Text style={styles.fechaTexto}>
                   Reservado el: {item.fechaCreacion}

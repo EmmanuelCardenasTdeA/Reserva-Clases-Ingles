@@ -52,7 +52,7 @@ export default function HomeScreen({ navigation }) {
         {/* Encabezado de bienvenida */}
         <View style={styles.encabezado}>
           <Text style={styles.saludo}>
-            Hola{nombre ? `, ${nombre}` : ' Inicia Sesion'}
+            {nombre ? `Hola, ${nombre}` : 'Inicia Sesion'}
           </Text>
           <Text style={styles.subtitulo}>{correo ? `${correo}`: ''}</Text>
         </View>
@@ -64,9 +64,6 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.descripcionSeccion}>
               Cursos con mejor rating
             </Text>
-          </View>
-          <View style={styles.badgeContador}>
-            <Text style={styles.textoBadge}>{clasesRecomendadas.length} clases</Text>
           </View>
         </View>
 
