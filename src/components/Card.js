@@ -19,6 +19,7 @@ export default function Card({ clase, urlImage, onPress, width }) {
       )}
       <View style={style.cuerpo}>
         {clase.nivel && <LabelLevel level={clase.nivel} />}
+        <Text style={typography.subtitulo}>{clase.titulo}</Text>
         
         <Text style={typography.subtitulo}>{clase.profesor?.nombre}</Text>
         
