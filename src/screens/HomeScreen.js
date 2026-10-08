@@ -17,7 +17,7 @@ export default function HomeScreen({ navigation }) {
   const insets = useSafeAreaInsets();
 
   // Filtramos las clases con calificación superior a 4.5
-  const clasesRecomendadas = CLASES.filter((clase) => clase.rating > 4.5);
+  const clasesRecomendadas = CLASES.filter((clase) => clase.rating > 4.5);//revisar
 
   return (
     <View style={[styles.contenedor, { paddingTop: insets.top }]}>

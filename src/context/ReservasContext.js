@@ -13,7 +13,7 @@ export function ReservaProvider({children}){
     useEffect(()=>{
         const cargar = async () =>{
             try {
-                const guardado = await AsyncStorage.setItem(CLAVE_RESERVAS);
+                const guardado = await AsyncStorage.setItem(CLAVE_RESERVAS);//revisar
                 if(guardado !== null){
                     setReservas(JSON.parse(guardado))
                 }
@@ -57,5 +57,5 @@ export function ReservaProvider({children}){
 const valor = useMemo(
     () => ({cargando, agregarReserva,reservas}), [cargando,agregarReserva,reservas]
 );
-return <ReservaProvider.Provider value={valor}>{children}</ReservaProvider.Provider>
+return <ReservaProvider.Provider value={valor}>{children}</ReservaProvider.Provider>//revisar
 }//Cierre funcion
